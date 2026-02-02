@@ -76,7 +76,7 @@ class InventoryItem {
       'serialNumber': serialNumber,
       'unitPrice': unitPrice,
       'assignedProject': assignedProject,
-      'createdAt': Timestamp.fromDate(createdAt),
+      'createdAt': Timestamp.fromDate(createdAt),  
       'updatedAt': Timestamp.fromDate(updatedAt),
       'createdBy': createdBy,
     };
