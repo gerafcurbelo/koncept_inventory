@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "126188958022",
+    "project_id": "koncept-8ad53",
+    "storage_bucket": "koncept-8ad53.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126188958022:android:03030bb19d1e373d88b547",
+        "android_client_info": {
+          "package_name": "com.example.koncept_inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126188958022-hqusdr7dqlo9v2p0377t8o1mcdg7p017.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQuySUr6aFFbzGf7YDd6shgrWwPicnesI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126188958022-hqusdr7dqlo9v2p0377t8o1mcdg7p017.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
