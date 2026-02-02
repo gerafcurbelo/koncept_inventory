@@ -1,0 +1,73 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper: check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper: get user document
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // Helper: check user role
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role == 'admin';
+    }
+
+    function isTechnician() {
+      return isAuthenticated() && getUserData().role == 'technician';
+    }
+
+    function isViewer() {
+      return isAuthenticated() && getUserData().role == 'viewer';
+    }
+
+    function canWrite() {
+      return isAdmin() || isTechnician();
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isAdmin() || request.auth.uid == userId;
+      allow delete: if isAdmin();
+    }
+
+    // Inventory items collection
+    match /inventory_items/{itemId} {
+      allow read: if isAuthenticated();
+      allow create: if canWrite();
+      allow update: if canWrite();
+      allow delete: if isAdmin();
+    }
+
+    // Partial materials collection
+    match /partial_materials/{materialId} {
+      allow read: if isAuthenticated();
+      allow create: if canWrite();
+      allow update: if canWrite();
+      allow delete: if isAdmin();
+    }
+
+    // Movements collection
+    match /movements/{movementId} {
+      allow read: if isAuthenticated();
+      allow create: if canWrite();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Projects collection
+    match /projects/{projectId} {
+      allow read: if isAuthenticated();
+      allow create: if canWrite();
+      allow update: if canWrite();
+      allow delete: if isAdmin();
+    }
+  }
+}
